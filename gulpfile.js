@@ -1,4 +1,3 @@
-//npm install --save-dev gulp-minify-css gulp-autoprefixer gulp-rename gulp-sass gulp-connect gulp-livereload gulp-uglify
 var	gulp = require('gulp'),
 	minifycss = require('gulp-minify-css'),
 	autoprefixer = require('gulp-autoprefixer'),
@@ -7,7 +6,6 @@ var	gulp = require('gulp'),
 	connect = require('gulp-connect'),
 	concat = require('gulp-concat'),
 	livereload = require('gulp-livereload'),
-	//babel = require('gulp-babel'),
 	gutil = require('gulp-util'),
 	browserify = require('browserify'),
 	babelify = require('babelify'),
@@ -51,26 +49,14 @@ gulp.task('cssmin', function() {
     .pipe(connect.reload());
 });
 
-//gulp.task('babel', function(){
-//	return gulp.src("src/jsx/*.jsx").
-//		pipe(babel({
-//			plugins: ['transform-react-jsx'],
-//			presets: ['es2015', 'react']
-//		})).
-//		pipe(gulp.dest("src/javascripts/"))
-//
-//});
-
 gulp.task('build', function () {
 	process.env.NODE_ENV = 'production';
 		browserify (
-
 			{
 				entries: './src/jsx/app.jsx',
 				extensions: ['.jsx'],
 				debug: true
 			}
-
 		)
 		.transform('babelify', {presets: ['es2015', 'react']})
 		.bundle()
@@ -78,11 +64,6 @@ gulp.task('build', function () {
 		.pipe(gulp.dest("src/javascripts/"));
 
 });
-
-//gulp.task('prod', () => {
-//	process.env.NODE_ENV = 'production';
-//	gulp.start('default');
-//});
 
 gulp.task('js', function() {
   return gulp.src(inputJs)
